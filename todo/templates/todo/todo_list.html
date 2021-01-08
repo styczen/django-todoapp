@@ -1,22 +1,30 @@
 {% extends 'todo/base.html' %}
 
 {% block content %}
-    <h3>ToDo</h3>
+    <h3>All tasks</h3>
     
     <form method="post" action="">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Create task">
+        <div class="row">
+            {% csrf_token %}
+            <div class="col-8">
+                {{ form }}
+            </div>
+            <div class="col-4">
+                <input type="submit" value="Create task" class="btn btn-secondary">
+            </div>
+        </div>
     </form>
     
-    {% for task in tasks %}
-        <a href="{% url 'todo:edit_task' task.id  %}">Edit</a>
-        <a href="{% url 'todo:delete_task' task.id  %}">Delete</a>
-        {% if task.complete == True %}
-            <strike><p>{{ task.content }}: {{ task.due_date }}</p></strike>
-        {% else %}
-            <p>{{ task.content }}: {{ task.due_date }}</p>
-        {% endif %}
-    {% endfor %}
+        {% for task in tasks %}
+            <li class="list-group-item">
+                <a href="{% url 'todo:edit_task' task.id  %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'todo:delete_task' task.id  %}" class="btn btn-danger">Delete</a>
+                {% if task.complete == True %}
+                    <strike><span>{{ task.content }}: {{ task.due_date }}</span></strike>
+                {% else %}
+                    <span>{{ task.content }}: {{ task.due_date }}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
 {% endblock %}
 

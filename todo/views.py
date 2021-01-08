@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
@@ -50,4 +51,10 @@ class DeleteTask(View):
     def post(self, request, pk):
         Task.objects.filter(pk=pk).delete()
         return redirect('todo:home')
+
+
+class MyDayView(View):
+    def get(self, request):
+        my_day_tasks = Task.objects.filter(due_date=datetime.now())
+        return render(request, 'todo/my_day_tasks.html', {'tasks': my_day_tasks})
 

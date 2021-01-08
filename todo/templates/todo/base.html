@@ -5,7 +5,20 @@
 </head>
 
 <body>
-    {% block content %}
-    {% endblock %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'todo:home' %}">Todo</a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-link active" href="{% url 'todo:my_day_tasks' %}">My Day</a>
+                    <a class="nav-link active" href="{% url 'todo:home' %}">All tasks</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    <div>
 </body>
 

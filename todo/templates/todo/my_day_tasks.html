@@ -1,0 +1,17 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+    <h3>My Day</h3>
+    {% for task in tasks %}
+        <li class="list-group-item">
+            <a href="{% url 'todo:edit_task' task.id  %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'todo:delete_task' task.id  %}" class="btn btn-danger">Delete</a>
+            {% if task.complete == True %}
+                <strike><span>{{ task.content }}: {{ task.due_date }}</span></strike>
+            {% else %}
+                <span>{{ task.content }}: {{ task.due_date }}</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endblock %}
+
