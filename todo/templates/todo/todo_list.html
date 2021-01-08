@@ -1,0 +1,22 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+    <h3>ToDo</h3>
+    
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Create task">
+    </form>
+    
+    {% for task in tasks %}
+        <a href="{% url 'todo:edit_task' task.id  %}">Edit</a>
+        <a href="{% url 'todo:delete_task' task.id  %}">Delete</a>
+        {% if task.complete == True %}
+            <strike><p>{{ task.content }}: {{ task.due_date }}</p></strike>
+        {% else %}
+            <p>{{ task.content }}: {{ task.due_date }}</p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
