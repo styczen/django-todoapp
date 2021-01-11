@@ -25,3 +25,7 @@ class TaskTestCase(TestCase):
         self.assertEqual(month, today.month) 
         self.assertEqual(day, today.day) 
 
+    def test_str_method(self):
+        task_str = str(Task.objects.get(id=1))
+        self.assertEqual(task_str, 'First test content')
+
